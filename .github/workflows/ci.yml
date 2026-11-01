@@ -1,10 +1,16 @@
 name: Python Data Pipeline CI
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Install Libraries
+        run: pip3 install pandas requests
       - name: Run Python Data Script
         run: python3 clean.py
