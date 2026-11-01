@@ -1,9 +1,13 @@
-import csv
+import requests
+import pandas as pd
 
-with open('dataset.csv', 'r') as infile, open('cleaned_dataset.csv', 'w', newline='') as outfile:
-    writer = csv.writer(outfile)
-    for row in csv.reader(infile):
-        if all(field.strip() for field in row):
-            writer.writerow(row)
+print("Fetching live data from API...")
+response = requests.get("https://fakestoreapi.com/products")
 
-print("Data cleaned successfully! CI check passed.")
+print("Processing with Pandas...")
+df = pd.DataFrame(response.json())
+
+df_cleaned = df[['id', 'title', 'price', 'category']]
+df_cleaned.to_csv("live_dataset.csv", index=False)
+
+print("Pipeline finished successfully!")
