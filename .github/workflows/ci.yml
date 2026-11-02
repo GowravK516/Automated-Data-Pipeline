@@ -38,6 +38,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add dataset.csv live_dataset.csv
-          git diff --staged --quiet || git commit -m "Automated ETL: Updated 5,000+ cleaned records [skip ci]"
+          git add dataset.csv live_dataset.csv report.md
+          git diff --staged --quiet || git commit -m "Automated ETL: Updated 5,000+ records and data quality report [skip ci]"
           git push origin HEAD:main
